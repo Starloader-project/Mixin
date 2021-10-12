@@ -82,6 +82,7 @@ module org.spongepowered.mixin {
     exports org.spongepowered.asm.mixin.injection.throwables;
     exports org.spongepowered.asm.mixin.refmap;
     exports org.spongepowered.asm.mixin.throwables;
+    exports org.spongepowered.asm.mixin.transformer;
     exports org.spongepowered.asm.mixin.transformer.ext;
     exports org.spongepowered.asm.mixin.transformer.throwables;
     exports org.spongepowered.asm.obfuscation;
@@ -90,6 +91,7 @@ module org.spongepowered.mixin {
     exports org.spongepowered.asm.obfuscation.mapping.mcp;
     exports org.spongepowered.asm.service;
     exports org.spongepowered.asm.service.modlauncher;
+    exports org.spongepowered.asm.transformers;
     exports org.spongepowered.asm.util;
     exports org.spongepowered.asm.util.asm;
     exports org.spongepowered.asm.util.perf;
@@ -105,11 +107,7 @@ module org.spongepowered.mixin {
     exports org.spongepowered.tools.obfuscation.mcp;
     exports org.spongepowered.tools.obfuscation.mirror;
     exports org.spongepowered.tools.obfuscation.service;
-    
-    // one of these won't exist, the SuppressWarnings above stops the compiler complaining
-    opens org.spongepowered.asm.mixin.transformer
-        to com.google.gson, gson;
-    
+
     //
     // Service wiring
     //
