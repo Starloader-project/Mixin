@@ -125,10 +125,12 @@ sourceSets {
 
 // Project dependencies
 dependencies {
-    def guava = 'com.google.guava:guava:21.0' // from mc1.12 onwards
+    def guava = 'com.google.guava:guava:31.0.1-jre' // from mc1.12 onwards
     
-    implementation guava
-    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation (guava) {
+        exclude module: 'checker-qual'
+    }
+    implementation 'com.google.code.gson:gson:2.8.8'
     if (Float.parseFloat(asmVersion) < 6) {
         implementation "org.ow2.asm:asm-debug-all:$asmVersion"
     }
@@ -139,8 +141,10 @@ dependencies {
 
     // Annotation Processor
     apImplementation "org.ow2.asm:asm-tree:$asmVersion"
-    apImplementation guava
-    
+    apImplementation (guava) {
+        exclude module: 'checker-qual'
+    }
+
     // Fernflower decompiler
     fernflowerImplementation 'org.jetbrains.java.decompiler:fernflower:sponge-SNAPSHOT'
 

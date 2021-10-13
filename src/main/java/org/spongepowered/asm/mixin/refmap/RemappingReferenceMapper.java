@@ -219,7 +219,7 @@ public final class RemappingReferenceMapper implements IReferenceMapper {
         }
                 
         try {
-            Files.readLines(file, Charsets.UTF_8, new LineProcessor<Object>() {
+            Files.asCharSource(file, Charsets.UTF_8).readLines(new LineProcessor<Object>() {
                 
                 @Override
                 public Object getResult() {

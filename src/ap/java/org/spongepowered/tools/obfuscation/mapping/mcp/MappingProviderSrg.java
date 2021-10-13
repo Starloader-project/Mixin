@@ -61,7 +61,7 @@ public class MappingProviderSrg extends MappingProvider {
         final BiMap<MappingField, MappingField> fieldMap = this.fieldMap;
         final BiMap<MappingMethod, MappingMethod> methodMap = this.methodMap;
 
-        Files.readLines(input, Charset.defaultCharset(), new LineProcessor<String>() {
+        Files.asCharSource(input, Charset.defaultCharset()).readLines(new LineProcessor<Object>() {
             @Override
             public String getResult() {
                 return null;

@@ -133,7 +133,7 @@ public class RuntimeDecompiler extends IFernflowerLogger implements IDecompiler,
         file.getParentFile().mkdirs();
         try {
             this.logger.info("Writing {}", file.getAbsolutePath());
-            Files.write(content, file, Charsets.UTF_8);
+            Files.asCharSink(file, Charsets.ISO_8859_1).write(content);
         } catch (IOException ex) {
             this.writeMessage("Cannot write source file " + file, ex);
         }
