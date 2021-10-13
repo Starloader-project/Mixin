@@ -45,7 +45,7 @@ module org.spongepowered.mixin {
     // Modules we require for compilation but don't necessarily need at runtime
     //
     requires static org.apache.logging.log4j.core;
-    requires static transitive cpw.mods.modlauncher;
+    requires static cpw.mods.modlauncher;
     requires static cpw.mods.securejarhandler;
     requires static transitive org.apache.logging.log4j;
     
