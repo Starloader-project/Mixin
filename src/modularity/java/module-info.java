@@ -45,14 +45,11 @@ module org.spongepowered.mixin {
     // Modules we require for compilation but don't necessarily need at runtime
     //
     requires static org.apache.logging.log4j.core;
-    requires static cpw.mods.modlauncher;
-    requires static cpw.mods.securejarhandler;
     requires static transitive org.apache.logging.log4j;
     
     //
     // Automatic modules we depend on, using static to avoid the forward compatibility mess
     //
-    requires static jopt.simple;
     requires static guava;
     requires static gson;
 
@@ -90,7 +87,6 @@ module org.spongepowered.mixin {
     exports org.spongepowered.asm.obfuscation.mapping.common;
     exports org.spongepowered.asm.obfuscation.mapping.mcp;
     exports org.spongepowered.asm.service;
-    exports org.spongepowered.asm.service.modlauncher;
     exports org.spongepowered.asm.transformers;
     exports org.spongepowered.asm.util;
     exports org.spongepowered.asm.util.asm;
@@ -112,25 +108,11 @@ module org.spongepowered.mixin {
     // Service wiring
     //
     uses org.spongepowered.asm.service.IMixinServiceBootstrap;
-    provides org.spongepowered.asm.service.IMixinServiceBootstrap
-        with org.spongepowered.asm.service.modlauncher.MixinServiceModLauncherBootstrap;
 
     uses org.spongepowered.asm.service.IMixinService;
-    provides org.spongepowered.asm.service.IMixinService
-        with org.spongepowered.asm.service.modlauncher.MixinServiceModLauncher;
 
     uses org.spongepowered.asm.service.IGlobalPropertyService;
-    provides org.spongepowered.asm.service.IGlobalPropertyService
-        with org.spongepowered.asm.service.modlauncher.Blackboard;
 
-    uses cpw.mods.modlauncher.api.ITransformationService;
-    provides cpw.mods.modlauncher.api.ITransformationService
-        with org.spongepowered.asm.launch.MixinTransformationService;
-
-    uses cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
-    provides cpw.mods.modlauncher.serviceapi.ILaunchPluginService
-        with org.spongepowered.asm.launch.MixinLaunchPlugin;
-    
     uses javax.annotation.processing.Processor;
     provides javax.annotation.processing.Processor
         with org.spongepowered.tools.obfuscation.MixinObfuscationProcessorInjection,

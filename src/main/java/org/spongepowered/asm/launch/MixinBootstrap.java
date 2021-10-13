@@ -121,6 +121,14 @@ public abstract class MixinBootstrap {
         return MixinBootstrap.platform;
     }
 
+    public static void init(CommandLineOptions args) {
+        if (!MixinBootstrap.start()) {
+            return;
+        }
+
+        MixinBootstrap.doInit(args);
+    }
+
     /**
      * Initialise the mixin subsystem
      */

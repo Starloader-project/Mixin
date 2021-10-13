@@ -60,11 +60,6 @@ repositories {
         name = 'sponge'
         url = 'https://repo.spongepowered.org/maven'
     }
-    maven {
-        // For modlauncher
-        name = 'forge'
-        url = 'https://files.minecraftforge.net/maven'
-    }
 }
 
 configurations {
@@ -74,9 +69,7 @@ configurations {
     fernflowerImplementation    .extendsFrom implementation
     launchwrapperImplementation .extendsFrom implementation
     agentImplementation         .extendsFrom implementation
-    modlauncherImplementation   .extendsFrom implementation
-    modlauncher9Implementation  .extendsFrom modlauncherImplementation
-    modularityImplementation    .extendsFrom modlauncher9Implementation
+    modularityImplementation    .extendsFrom implementation
 }
 
 sourceSets {
@@ -124,22 +117,6 @@ sourceSets {
         ext.languageVersion = 8
         ext.compatibility = '1.8'
     }
-    modlauncher {
-        compileClasspath += main.output
-        ext.languageVersion = 8
-        ext.compatibility = '1.8'
-    }
-    modlauncher4 {
-        compileClasspath += main.output
-        compileClasspath += modlauncher.output
-        ext.languageVersion = 8
-        ext.compatibility = '1.8'
-    }
-    modlauncher9 {
-        ext.languageVersion = 16
-        compileClasspath += main.output
-        compileClasspath += modlauncher.output
-    }
     modularity {
         ext.languageVersion = 16
         ext.modularityExcluded = true // don't add ourselves
@@ -173,30 +150,6 @@ dependencies {
         exclude module: 'asm-debug-all'
         exclude module: 'jopt-simple'
     }
-    
-    modlauncherImplementation 'net.sf.jopt-simple:jopt-simple:5.0.4'
-    modlauncherCompileOnly 'org.apache.logging.log4j:log4j-core:2.0-beta9'
-    modlauncherImplementation ("cpw.mods:modlauncher:$legacyModlauncherVersion") {
-        exclude module: 'asm'
-        exclude module: 'asm-analysis'
-        exclude module: 'asm-commons'
-        exclude module: 'asm-tree'
-        exclude module: 'jopt-simple'
-    }
-    
-    modlauncher4Implementation ("cpw.mods:modlauncher:$legacyModlauncherVersion") {
-        exclude module: 'asm'
-        exclude module: 'asm-analysis'
-        exclude module: 'asm-commons'
-        exclude module: 'asm-tree'
-        exclude module: 'jopt-simple'
-    }
-    
-    modlauncher9Implementation ("cpw.mods:modlauncher:$modlauncherVersion") {
-        exclude module: 'jopt-simple'
-    }
-    modlauncher9Implementation 'cpw.mods:securejarhandler:0.9.+'
-    
     // asm bridge
     bridgeImplementation 'org.apache.logging.log4j:log4j-core:2.0-beta9'
     bridgeImplementation "org.ow2.asm:asm-commons:$legacyForgeAsmVersion"
@@ -231,7 +184,6 @@ eclipse {
         containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
         file.whenMerged {
             // Can't include old modlauncher because it causes issues with modules
-            entries.removeAll { it.kind == 'lib' && it.path =~ ~/modlauncher-$legacyModlauncherVersion/ }
             entries.removeAll { it.kind == 'src' && it.path =~ ~/modlauncher4/ }
             entries.removeAll { it.kind == 'lib' && it.path =~ ~/log4j.*beta9/ }
             
@@ -243,7 +195,7 @@ eclipse {
     }
     
     // Build service task outputs for test projects
-    autoBuildTasks compileModlauncher4Java, compileModlauncher9Java, compileLaunchwrapperJava
+    autoBuildTasks compileLaunchwrapperJava
 }
 
 // Filter, process, and include resources
