@@ -293,7 +293,7 @@ task stagingJar(type: ShadowJar) {
         "Created-By": System.properties['java.vm.version'] + " (" + System.properties['java.vm.vendor'] + ")",
         "Implementation-Title": name,
         "Implementation-Version": project.version + "+" + ciSystem + "-b" + buildNumber + ".git-" + commit,
-        "Implementation-Vendor": url,
+        "Implementation-Vendor": "Starloader-project",
         // for hotswap agent
         "Premain-Class": "org.spongepowered.tools.agent.MixinAgent",
         "Agent-Class": "org.spongepowered.tools.agent.MixinAgent",

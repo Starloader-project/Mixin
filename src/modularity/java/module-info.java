@@ -47,7 +47,7 @@ module org.spongepowered.mixin {
     // Modules we require for compilation but don't necessarily need at runtime
     //
     requires static org.apache.logging.log4j.core;
-    requires static transitive org.apache.logging.log4j;
+    requires static org.apache.logging.log4j;
 
     //
     // Exports
@@ -118,4 +118,7 @@ module org.spongepowered.mixin {
     provides org.spongepowered.tools.obfuscation.service.IObfuscationService
         with org.spongepowered.tools.obfuscation.mcp.ObfuscationServiceMCP,
              org.spongepowered.tools.obfuscation.fg3.ObfuscationServiceFG3;
+
+    // Dependency injection
+    opens org.spongepowered.asm.mixin.transformer to com.google.gson;
 }
